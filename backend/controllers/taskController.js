@@ -52,20 +52,14 @@ export const createTask = async (req, res) => {
 // @route   PUT /api/tasks/:id
 export const updateTask = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
+    const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      returnDocument: "after",
+      runValidators: true,
+    });
 
-    if (!task) {
+    if (!updatedTask) {
       return res.status(404).json({ message: "Task not found" });
     }
-
-    const updatedTask = await Task.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
 
     res.status(200).json(updatedTask);
   } catch (error) {
