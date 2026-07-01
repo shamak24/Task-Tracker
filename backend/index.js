@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import connectDB from "./config/db.js";
-// import taskRoutes from "./routes/taskRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
 
 dotenv.config();
 
@@ -18,15 +18,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-// app.use("/api/tasks", taskRoutes);
+app.use("/api/tasks", taskRoutes);
 
-// // Test Route
-// app.get("/", (req, res) => {
-//   res.json({
-//     success: true,
-//     message: "Task Tracker API is running 🚀",
-//   });
-// });
+// Test Route
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Task Tracker API is running 🚀",
+  });
+});
 
 // 404 Handler
 app.use((req, res) => {
